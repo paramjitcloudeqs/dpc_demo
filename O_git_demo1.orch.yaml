@@ -32,6 +32,7 @@ pipeline:
           #   See here: https://docs.snowflake.com/en/developer-guide/snowpark/python/working-with-dataframes
           ###)
           print("Test")
+          print("test2")
         scriptTimeout: "360"
       postProcessing:
         updateScalarVariables:
