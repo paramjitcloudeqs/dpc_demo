@@ -33,6 +33,7 @@ pipeline:
           ###)
           print("Test")
           print("test2")
+          print("Test 3")
         scriptTimeout: "360"
       postProcessing:
         updateScalarVariables:
