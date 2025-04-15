@@ -34,6 +34,7 @@ pipeline:
           print("Test")
           print("test2")
           print("Test 3")
+          print("test 4")
         scriptTimeout: "360"
       postProcessing:
         updateScalarVariables:
@@ -47,5 +48,5 @@ design:
     Python Pushdown:
       position:
         x: -120
-        "y": -80
+        "y": -90
       tempMetlId: 2
