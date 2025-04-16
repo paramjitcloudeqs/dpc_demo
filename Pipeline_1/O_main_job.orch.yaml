@@ -80,10 +80,11 @@ design:
   notes:
     "1":
       position:
-        x: -140
-        "y": -70
+        x: -280
+        "y": -360
       size:
-        height: 58
-        width: 480
+        height: 228
+        width: 560
       theme: "green"
-      content: "CICD TEST"
+      content: "CICD TEST \n1.with branch as dev ❌\n2.with branch as main ❌\n3.with\
+        \ branch as dev_1"
