@@ -49,7 +49,7 @@ def get_artifacts(token):
     headers = {
         'Authorization': f'Bearer {token}',
         'environmentName': 'env_prod',
-        'branch': 'main',
+        'branch': 'dev_1',
         'versionName':  version_name
     }
 
