@@ -77,3 +77,13 @@ design:
         x: -40
         "y": 0
       tempMetlId: 5
+  notes:
+    "1":
+      position:
+        x: -140
+        "y": -70
+      size:
+        height: 58
+        width: 480
+      theme: "green"
+      content: "CICD TEST"
