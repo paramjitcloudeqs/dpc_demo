@@ -61,3 +61,13 @@ design:
         x: 140
         "y": -160
       tempMetlId: 3
+  notes:
+    "1":
+      position:
+        x: -310
+        "y": -280
+      size:
+        height: 268
+        width: 630
+      theme: "light-green"
+      content: "Pipeline to test variables and cicd"
