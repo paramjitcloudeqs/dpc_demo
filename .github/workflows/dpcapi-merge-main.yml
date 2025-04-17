@@ -12,6 +12,9 @@ jobs:
     env:
       CLIENT_ID: ${{ secrets.CLIENT_ID }}
       CLIENT_SECRET: ${{ secrets.CLIENT_SECRET }}
+      PROJECT_ID: ${{ secrets.PROJECT_ID }}
+      ENV_NAME: ${{ secrets.ENV_NAME }}
+      DPC_BRANCH_NAME: ${{ secrets.DPC_BRANCH_NAME }}
 
     steps:
       - name: Checkout repository
@@ -27,5 +30,5 @@ jobs:
           python -m pip install --upgrade pip
           pip install requests
 
-      - name: Run python script
+      - name: Run tokens_artifacts.py
         run: python tokens_artifacts.py
