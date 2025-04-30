@@ -70,6 +70,19 @@ pipeline:
         orderBy:
       postProcessing:
         updateScalarVariables:
+    Rewrite Table 2 3:
+      type: "rewrite-table"
+      sources:
+      - "Calculator"
+      parameters:
+        componentName: "Rewrite Table 2 3"
+        warehouse: "[Environment Default]"
+        database: "${EV_DB_TEST}"
+        schema: "${EV_SCHEMA_TEST}"
+        targetTable: "DPC_${EV_ENVIRONMENT}_OUTPUT_4"
+        orderBy:
+      postProcessing:
+        updateScalarVariables:
 design:
   components:
     DIM_PRODUCTS:
@@ -97,6 +110,11 @@ design:
         x: 150
         "y": -250
       tempMetlId: 5
+    Rewrite Table 2 3:
+      position:
+        x: 120
+        "y": 40
+      tempMetlId: 6
   notes:
     "1":
       position:
