@@ -1,0 +1,13 @@
+# This file contains shared pipelines configuration which defines how they appear to consuming users.
+# The configuration is automatically updated when changes are made to shared pipelines in the Designer UI.
+# Please exercise caution when manually editing to avoid conflicts or data loss.
+# For more information please see our documentation.
+
+version: "1.0"
+type: shared-pipelines-config
+pipelines:
+  - pipeline: O_git_demo1.orch.yaml
+    displayName: O_git_demo1
+    id: O_git_demo1
+    enabled: true
+    parameters: {}
