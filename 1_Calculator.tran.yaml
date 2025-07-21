@@ -98,6 +98,20 @@ pipeline:
       postProcessing:
         updateOutputMessage: "Table Created Succefully."
         updateScalarVariables:
+    Rewrite Table 2:
+      type: "rewrite-table"
+      sources:
+      - "Calculator 0"
+      parameters:
+        componentName: "Rewrite Table 2"
+        warehouse: "[Environment Default]"
+        database: "INTERNAL_TRAINING"
+        schema: "DBT_MKHAMBADKAR"
+        targetTable: "DPC_DEMO_1"
+        orderBy:
+      postProcessing:
+        updateOutputMessage: "Table Created Succefully."
+        updateScalarVariables:
 design:
   components:
     M_STUDENT:
@@ -125,6 +139,11 @@ design:
         x: 770
         "y": 180
       tempMetlId: 1191165
+    Rewrite Table 2:
+      position:
+        x: 740
+        "y": 330
+      tempMetlId: 1191166
   notes:
     "1191297":
       position:
