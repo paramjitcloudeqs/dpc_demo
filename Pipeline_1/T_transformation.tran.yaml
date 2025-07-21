@@ -1,0 +1,127 @@
+type: "transformation"
+version: "1.0"
+pipeline:
+  components:
+    DIM_PRODUCTS:
+      type: "table-input"
+      parameters:
+        componentName: "DIM_PRODUCTS"
+        database: "EDW"
+        schema: "EDP_CURATED"
+        targetTable: "DIM_PRODUCTS"
+        columnNames:
+        - "PRODUCT_ID"
+        - "PRODUCT_CATEGORY"
+        - "PRODUCT_NUMBER"
+        - "PRODUCT_TITLE"
+        - "VENDOR"
+        - "SRC_CREATE_DATE"
+        - "SRC_LAST_UPDATE_DATE"
+        - "ETL_INSERT_DATE"
+        - "ETL_LAST_UPDATE_DATE"
+        - "IS_ACTIVE"
+        timeOffset:
+    Calculator:
+      type: "calculator"
+      sources:
+      - "DIM_PRODUCTS"
+      parameters:
+        componentName: "Calculator"
+        includeInputColumns: "Yes"
+        calculations:
+        - - "'${EV_ENVIRONMENT}'"
+          - "ENV"
+    Rewrite Table:
+      type: "rewrite-table"
+      sources:
+      - "Calculator"
+      parameters:
+        componentName: "Rewrite Table"
+        warehouse: "[Environment Default]"
+        database: "${EV_DB_TEST}"
+        schema: "${EV_SCHEMA_TEST}"
+        targetTable: "DPC_${EV_ENVIRONMENT}_OUTPUT"
+        orderBy:
+      postProcessing:
+        updateScalarVariables:
+    Rewrite Table 2:
+      type: "rewrite-table"
+      sources:
+      - "Calculator"
+      parameters:
+        componentName: "Rewrite Table 2"
+        warehouse: "[Environment Default]"
+        database: "${EV_DB_TEST}"
+        schema: "${EV_SCHEMA_TEST}"
+        targetTable: "DPC_${EV_ENVIRONMENT}_OUTPUT_2"
+        orderBy:
+      postProcessing:
+        updateScalarVariables:
+    Rewrite Table 2 2:
+      type: "rewrite-table"
+      sources:
+      - "Calculator"
+      parameters:
+        componentName: "Rewrite Table 2 2"
+        warehouse: "[Environment Default]"
+        database: "${EV_DB_TEST}"
+        schema: "${EV_SCHEMA_TEST}"
+        targetTable: "DPC_${EV_ENVIRONMENT}_OUTPUT_3"
+        orderBy:
+      postProcessing:
+        updateScalarVariables:
+    Rewrite Table 2 3:
+      type: "rewrite-table"
+      sources:
+      - "Calculator"
+      parameters:
+        componentName: "Rewrite Table 2 3"
+        warehouse: "[Environment Default]"
+        database: "${EV_DB_TEST}"
+        schema: "${EV_SCHEMA_TEST}"
+        targetTable: "DPC_${EV_ENVIRONMENT}_OUTPUT_4"
+        orderBy:
+      postProcessing:
+        updateScalarVariables:
+design:
+  components:
+    DIM_PRODUCTS:
+      position:
+        x: -180
+        "y": -160
+      tempMetlId: 1
+    Calculator:
+      position:
+        x: -20
+        "y": -160
+      tempMetlId: 2
+    Rewrite Table:
+      position:
+        x: 140
+        "y": -160
+      tempMetlId: 3
+    Rewrite Table 2:
+      position:
+        x: 140
+        "y": -50
+      tempMetlId: 4
+    Rewrite Table 2 2:
+      position:
+        x: 150
+        "y": -250
+      tempMetlId: 5
+    Rewrite Table 2 3:
+      position:
+        x: 120
+        "y": 40
+      tempMetlId: 6
+  notes:
+    "1":
+      position:
+        x: -310
+        "y": -280
+      size:
+        height: 268
+        width: 630
+      theme: "light-green"
+      content: "Pipeline to test variables and cicd"

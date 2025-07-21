@@ -1,0 +1,90 @@
+type: "orchestration"
+version: "1.0"
+pipeline:
+  components:
+    Start:
+      type: "start"
+      transitions:
+        unconditional:
+        - "Print Variables"
+      parameters:
+        componentName: "Start"
+    Run T_transformation:
+      type: "run-transformation"
+      transitions:
+        success:
+        - "End Success"
+        failure:
+        - "End Failure"
+      parameters:
+        componentName: "Run T_transformation"
+        transformationJob: "Pipeline_1/T_transformation.tran.yaml"
+        setScalarVariables:
+        setGridVariables:
+      postProcessing:
+        updateScalarVariables:
+    End Success:
+      type: "end-success"
+      parameters:
+        componentName: "End Success"
+      postProcessing:
+        updateScalarVariables:
+    End Failure:
+      type: "end-failure"
+      parameters:
+        componentName: "End Failure"
+      postProcessing:
+        updateScalarVariables:
+    Print Variables:
+      type: "print-variables"
+      transitions:
+        success:
+        - "Run T_transformation"
+      parameters:
+        componentName: "Print Variables"
+        variablesToPrint:
+        - - "EV_DB_TEST"
+        - - "EV_ENVIRONMENT"
+        - - "EV_SCHEMA_TEST"
+        prefixText:
+        includeVariableName: "Yes"
+      postProcessing:
+        updateScalarVariables:
+design:
+  components:
+    Start:
+      position:
+        x: -140
+        "y": 0
+      tempMetlId: 1
+    Run T_transformation:
+      position:
+        x: 110
+        "y": 0
+      tempMetlId: 2
+    End Success:
+      position:
+        x: 300
+        "y": 0
+      tempMetlId: 3
+    End Failure:
+      position:
+        x: 300
+        "y": 80
+      tempMetlId: 4
+    Print Variables:
+      position:
+        x: -40
+        "y": 0
+      tempMetlId: 5
+  notes:
+    "1":
+      position:
+        x: -280
+        "y": -360
+      size:
+        height: 228
+        width: 560
+      theme: "green"
+      content: "CICD TEST \n1.with branch as dev ❌\n2.with branch as main ❌\n3.with\
+        \ branch as dev_1"
