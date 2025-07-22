@@ -13,7 +13,7 @@ jobs:
       CLIENT_ID: ${{ secrets.CLIENT_ID }}
       CLIENT_SECRET: ${{ secrets.CLIENT_SECRET }}
       PROJECT_ID: ${{ secrets.PROJECT_ID }}
-      ENV_NAME: env_dev
+      ENV_NAME: ${{ secrets.DEV_ENV_NAME }}
 
     steps:
       - name: Checkout repository
