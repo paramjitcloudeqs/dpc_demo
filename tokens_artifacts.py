@@ -61,10 +61,10 @@ def get_artifacts(token):
     print("Artifacts Responses \n")
     print("Status Code:", response.status_code)
     if response.status_code == 201:
-    print("Artifact Published Successfully")
-    print("Version Name:", version_name)
+        print("Artifact Published Successfully")
+        print("Version Name:", version_name)
     else:
-    print("Job Failed – Artifact not published")
+        print("Job Failed – Artifact not published")
 
 
 ## Main Function
