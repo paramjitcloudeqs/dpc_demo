@@ -7,7 +7,7 @@ import os
 client_id = os.getenv("CLIENT_ID")
 client_secret = os.getenv("CLIENT_SECRET")
 project_id = os.getenv("PROJECT_ID")
-env_name = os.getenv("ENV_NAME")
+env_name = os.getenv("DEV_ENV_NAME")
 # dpc_branch_name = os.getenv("DPC_BRANCH_NAME")
 
 ## Function to get the bearer token
