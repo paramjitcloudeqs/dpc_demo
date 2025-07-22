@@ -3,7 +3,7 @@ name: Run tokens_artifacts.py on PR Merge to Main
 on:
   push:
     branches:
-      - main
+      - dev
 
 jobs:
   run-script:
