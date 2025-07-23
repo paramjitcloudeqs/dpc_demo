@@ -40,7 +40,7 @@ pipeline:
         warehouse: "[Environment Default]"
         database: "INTERNAL_TRAINING"
         schema: "DBT_MKHAMBADKAR"
-        targetTable: "dpc_demo_rename"
+        targetTable: "DPC_MTLN_TEST_1"
         orderBy:
       postProcessing:
         updateOutputMessage:
