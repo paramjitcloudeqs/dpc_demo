@@ -7,7 +7,7 @@ import os
 client_id = os.getenv("CLIENT_ID")
 client_secret = os.getenv("CLIENT_SECRET")
 project_id = os.getenv("PROJECT_ID")
-env_name = os.getenv("ENV_NAME")
+env_name = os.getenv("DEV_ENV_NAME")
 # dpc_branch_name = os.getenv("DPC_BRANCH_NAME")
 
 ## Function to get the bearer token
@@ -60,8 +60,12 @@ def get_artifacts(token):
     response = requests.post(url, headers=headers, files=files)
     print("Artifacts Responses \n")
     print("Status Code:", response.status_code)
-    print("Artifact Published Successfully")
-    print("Version Name:", version_name)
+    if response.status_code == 201:
+        print("Artifact Published Successfully")
+        print("Version Name:", version_name)
+    else:
+        print("Job Failed – Artifact not published")
+
 
 ## Main Function
 def main():
