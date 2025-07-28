@@ -1,0 +1,78 @@
+type: "orchestration"
+version: "1.0"
+pipeline:
+  components:
+    Start:
+      type: "start"
+      transitions:
+        unconditional:
+        - "Salesforce Load"
+      parameters:
+        componentName: "Start"
+    Salesforce Load:
+      type: "modular-salesforce-input-v1"
+      parameters:
+        componentName: "Salesforce Load"
+        componentId: "modular-salesforce-input-v1"
+        inputId: "salesforce-input-v1"
+        salesforce-input-v1:
+          connection:
+            authType: "OAUTH_USER_TOKENS"
+            secretReferenceId: "sfdc_masterio"
+          connectionOptions:
+          mode: "BASIC"
+          dataSource: "AccountCleanInfo"
+          dataSelection:
+          dataSourceFilter:
+          combineFilters: "AND"
+          limit:
+          autoDebug: "No"
+        outputId:
+        dataLoading:
+          loadType: "INCREMENTAL_LOAD"
+          incrementalLoading:
+            highWaterMarkSelection:
+      postProcessing:
+        updateOutputMessage:
+        updateScalarVariables:
+    dbt Cloud Connector 4:
+      type: "modular-api-extract-input-v2"
+      parameters:
+        componentName: "dbt Cloud Connector 4"
+        componentId: "flex_v2-dbt-cloud"
+        inputId: "api-extract-input-v2"
+        api-extract-input-v2:
+          profile: "flex-dbt-cloud"
+          endpoint: "Retrieve Job"
+          connectionRef:
+            overrides:
+              authType: "BEARER_TOKEN"
+              token:
+          uriParams:
+          queryParams:
+          headerParams:
+          postBody:
+          pageLimit:
+          logLevel: "ERROR"
+          loadSelectedData: "No"
+        outputId:
+      postProcessing:
+        updateOutputMessage:
+        updateScalarVariables:
+design:
+  components:
+    Start:
+      position:
+        x: -480
+        "y": -10
+      tempMetlId: 1
+    Salesforce Load:
+      position:
+        x: -330
+        "y": -10
+      tempMetlId: 3
+    dbt Cloud Connector 4:
+      position:
+        x: -190
+        "y": 70
+      tempMetlId: 7
