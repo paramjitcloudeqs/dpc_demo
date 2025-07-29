@@ -11,3 +11,8 @@ pipelines:
     id: O_git_demo1
     enabled: true
     parameters: {}
+  - pipeline: Prasanth_Test/DPC_DBT_Shared_Job.orch.yaml
+    displayName: DPC_DBT_Shared_Job
+    id: DPC_DBT_Shared_Job
+    enabled: true
+    parameters: {}
