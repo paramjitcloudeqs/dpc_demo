@@ -16,3 +16,16 @@ pipelines:
     id: DPC_DBT_Shared_Job
     enabled: true
     parameters: {}
+  - pipeline: Prasanth_Test/Prasanth_Test/Shared_Job_DBT.orch.yaml
+    displayName: Shared_Job_DBT
+    id: Shared_Job_DBT
+    enabled: true
+    parameters:
+      url:
+        type: TEXT
+        exportAllowed: true
+        description: ""
+      Response_json:
+        type: TEXT
+        exportAllowed: true
+        description: ""

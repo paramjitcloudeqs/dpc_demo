@@ -1,0 +1,94 @@
+type: "orchestration"
+version: "1.0"
+pipeline:
+  components:
+    Print Variable:
+      type: "python-script"
+      skipped: false
+      parameters:
+        componentName: "Print Variable"
+        script: "###\n# Variables are directly accessible: \n#   print (myvar)\n#\
+          \ Updating a variable:\n#   context.updateVariable('myvar', 'new-value')\n\
+          # Grid Variables are accessible via the context:\n#   print (context.getGridVariable('mygridvar'))\n\
+          # Updating a grid variable:\n#   context.updateGridVariable('mygridvar',\
+          \ [['list','of'],['lists','!']])\n# A database cursor can be accessed from\
+          \ the context (Jython only):\n#   cursor = context.cursor()\n#   cursor.execute('select\
+          \ count(*) from mytable')\n#   rowcount = cursor.fetchone()[0]\n###\n\n\
+          print(Response_json)"
+        interpreter: "Python 3"
+        timeout: "360"
+    Start 0:
+      type: "start"
+      transitions:
+        unconditional:
+        - "DBT Job Trigger"
+      skipped: false
+      parameters:
+        componentName: "Start 0"
+    DBT Job Trigger:
+      type: "python-script"
+      transitions:
+        unconditional:
+        - "Print Variable"
+      skipped: false
+      parameters:
+        componentName: "DBT Job Trigger"
+        script: |
+          import requests
+          import json
+          import re
+
+          #DBT_API_KEY = 'dbtc_o-rZ67Y4sXufo28OFOsJhF3uzoA0g3MKKFlqqBBNdndA6kmo8o'
+
+          #url = "https://cloud.getdbt.com/api/v2/accounts/179022/jobs/909792/run/"
+
+
+          payload = json.dumps({"cause": "Triggered via Matillion"})
+
+          headers = {
+            'Authorization': 'Token '+${DBT_API_KEY},
+            'Content-Type': 'application/json'
+          }
+
+          response = requests.request("POST", ${url}, headers=headers, data=payload)
+
+          response_json = response.json()['status']
+          print('Message = '+response_json['user_message'])
+
+          text=response_json['user_message']
+          print(text)
+          context.updateVariable('Response_json', 'success')
+        interpreter: "Python 3"
+        timeout: "360"
+  variables:
+    url:
+      metadata:
+        type: "TEXT"
+        description: ""
+        scope: "SHARED"
+        visibility: "PUBLIC"
+      defaultValue: "\"https://cloud.getdbt.com/api/v2/accounts/179022/jobs/909792/run/\""
+    Response_json:
+      metadata:
+        type: "TEXT"
+        description: ""
+        scope: "SHARED"
+        visibility: "PUBLIC"
+      defaultValue: ""
+design:
+  components:
+    Print Variable:
+      position:
+        x: -116
+        "y": -124
+      tempMetlId: 1296644
+    Start 0:
+      position:
+        x: -464
+        "y": -128
+      tempMetlId: 1296645
+    DBT Job Trigger:
+      position:
+        x: -272
+        "y": -128
+      tempMetlId: 1296646
