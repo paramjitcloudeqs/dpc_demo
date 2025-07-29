@@ -1,0 +1,33 @@
+type: "orchestration"
+version: "1.0"
+pipeline:
+  components:
+    Start:
+      type: "start"
+      transitions:
+        unconditional:
+        - "Run DPC_DBT_Shared_Job"
+      parameters:
+        componentName: "Start"
+    Run DPC_DBT_Shared_Job:
+      type: "run-orchestration"
+      parameters:
+        componentName: "Run DPC_DBT_Shared_Job"
+        orchestrationJob: "Prasanth_Test/DPC_DBT_Shared_Job.orch.yaml"
+        setScalarVariables:
+        setGridVariables:
+      postProcessing:
+        updateOutputMessage:
+        updateScalarVariables:
+design:
+  components:
+    Start:
+      position:
+        x: -470
+        "y": 0
+      tempMetlId: 1
+    Run DPC_DBT_Shared_Job:
+      position:
+        x: -250
+        "y": 0
+      tempMetlId: 2
