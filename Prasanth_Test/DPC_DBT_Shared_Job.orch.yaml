@@ -1,0 +1,60 @@
+type: "orchestration"
+version: "1.0"
+pipeline:
+  components:
+    Start:
+      type: "start"
+      transitions:
+        unconditional:
+        - "dbt Cloud Connector"
+      parameters:
+        componentName: "Start"
+    dbt Cloud Connector:
+      type: "modular-api-extract-input-v2"
+      parameters:
+        componentName: "dbt Cloud Connector"
+        componentId: "flex_v2-dbt-cloud"
+        inputId: "api-extract-input-v2"
+        api-extract-input-v2:
+          profile: "flex-dbt-cloud"
+          endpoint: "Trigger Job Run"
+          connectionRef:
+            overrides:
+              authType: "BEARER_TOKEN"
+              token: "DBT_Token"
+          uriParams:
+          - name: "account_id"
+            value: "179022"
+          - name: "job_id"
+            value: "909792"
+          queryParams:
+          headerParams:
+          postBody:
+          pageLimit:
+          logLevel: "ERROR"
+          loadSelectedData: "Yes"
+        outputId: "snowflake-output-connector-v0"
+        snowflake-output-connector-v0:
+          warehouse: "COMPUTE_WH"
+          database: "EDW"
+          schema: "EDP_CURATED"
+          tableName: "DPC_DBT_TEST"
+          createTableMode: "APPEND"
+          cleanStagedFiles: "Yes"
+          stagePlatform: "SNOWFLAKE"
+          snowflake#internalStageType: "USER"
+      postProcessing:
+        updateOutputMessage:
+        updateScalarVariables:
+design:
+  components:
+    Start:
+      position:
+        x: -540
+        "y": -10
+      tempMetlId: 1
+    dbt Cloud Connector:
+      position:
+        x: -330
+        "y": -10
+      tempMetlId: 2
