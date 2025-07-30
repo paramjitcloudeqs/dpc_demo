@@ -6,15 +6,20 @@ pipeline:
       type: "start"
       transitions:
         unconditional:
-        - "Run DPC_DBT_Shared_Job"
+        - "Run Shared Pipeline"
       parameters:
         componentName: "Start"
-    Run DPC_DBT_Shared_Job:
-      type: "run-orchestration"
+    Run Shared Pipeline:
+      type: "run-shared-pipeline"
       parameters:
-        componentName: "Run DPC_DBT_Shared_Job"
-        orchestrationJob: "Prasanth_Test/DPC_DBT_Shared_Job.orch.yaml"
+        componentName: "Run Shared Pipeline"
+        pipelineName: "EDW_DPC_DEMO#DPC_DBT_Shared_Job"
+        version: "[Latest]"
         setScalarVariables:
+        - - "Test_DBT_Job_ID"
+          - "909792"
+        - - "Test_DBT_Account_ID"
+          - "179022"
         setGridVariables:
       postProcessing:
         updateOutputMessage:
@@ -26,8 +31,8 @@ design:
         x: -470
         "y": 0
       tempMetlId: 1
-    Run DPC_DBT_Shared_Job:
+    Run Shared Pipeline:
       position:
         x: -250
-        "y": 0
-      tempMetlId: 2
+        "y": -20
+      tempMetlId: 3
