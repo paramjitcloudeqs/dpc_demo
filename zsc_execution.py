@@ -115,24 +115,27 @@ def hardcoding_quality_checks():
                         print(f"⚠️ Could not parse YAML for {pipeline_path}: {e}")
                         continue
 
+                print(f" Checking {pipeline_path}")
+
                 # Navigate to pipeline components
                 components = pipeline_yaml.get("pipeline", {}).get("components", {})
                 for comp_name, comp_def in components.items():
                     params = comp_def.get("parameters", {})
 
+                    
                     # --- Check warehouse ---
                     if "warehouse" in params and params["warehouse"] != "[Environment Default]":
-                        print(f"❌ Hard coded warehouse in {pipeline_path} → {comp_name}: {params['warehouse']}")
+                        print(f"❌ Hard coded warehouse in {comp_name}: {params['warehouse']}")
                         issues_found = True
 
                     # --- Check database ---
                     if "database" in params and not str(params["database"]).startswith("${"):
-                        print(f"❌ Hard coded database in {pipeline_path} → {comp_name}: {params['database']}")
+                        print(f"❌ Hard coded database in {comp_name}: {params['database']}")
                         issues_found = True
 
                     # --- Check schema ---
                     if "schema" in params and not str(params["schema"]).startswith("${"):
-                        print(f"❌ Hard coded schema in {pipeline_path} → {comp_name}: {params['schema']}")
+                        print(f"❌ Hard coded schema in {comp_name}: {params['schema']}")
                         issues_found = True
 
         if not issues_found:
