@@ -29,6 +29,8 @@ jobs:
       - name: Install dependencies
         run: |
           pip install requests
+          pip install pyyaml
+
 
       - name: Get list of changed pipeline files
         run: |
