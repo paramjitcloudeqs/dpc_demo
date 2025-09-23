@@ -37,7 +37,7 @@ pipeline:
       - "Rename (ID->Rename_ID,Name->Rename->Rename_Name..)"
       parameters:
         componentName: "Rewrite Table"
-        warehouse: "[Environment Default]"
+        warehouse: "COMPUTE_WH"
         database: "INTERNAL_TRAINING"
         schema: "DBT_MKHAMBADKAR"
         targetTable: "DPC_MTLN_TEST_1"
@@ -54,11 +54,11 @@ design:
       tempMetlId: 1184069
     Rename (ID->Rename_ID,Name->Rename->Rename_Name..):
       position:
-        x: 592
-        "y": 48
+        x: 540
+        "y": 70
       tempMetlId: 1184072
     Rewrite Table:
       position:
-        x: 752
-        "y": 48
+        x: 750
+        "y": 50
       tempMetlId: 1184073
