@@ -112,8 +112,8 @@ design:
       tempMetlId: 1191082
     Left Join:
       position:
-        x: 407
-        "y": 175
+        x: 410
+        "y": 210
       tempMetlId: 1191150
     Calculator 0:
       position:
