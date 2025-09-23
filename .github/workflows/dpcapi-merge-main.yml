@@ -36,4 +36,5 @@ jobs:
           cat changed_pipelines.txt
 
       - name: Run Matillion artifact + pipeline execution
-        run: python execution.py
+        # run: python execution.py
+        run: python zsc_execution.py
