@@ -178,33 +178,25 @@ def hardcoding_quality_checks():
                     for sql_param in ["sqlScript", "sqlQuery", "query"]:
                         if sql_param in params and isinstance(params[sql_param], str):
                             sql_content = params[sql_param]
-                            # Regex pattern to detect database.schema.table for validation
-                            matches = re.findall(r"[a-zA-Z_]+(?:\.[a-zA-Z_]+)+", sql_content)
+                            # Regex pattern to specifically detect Database.Schema
+                            matches = re.findall(r"[a-zA-Z_]+\.[a-zA-Z_]+", sql_content)
 
 
                             for match in matches:
-                                # Split into components: Database, Schema, and Table
-                                components = match.split(".")
-                                if len(components) >= 2:  # Ensure at least Database.Schema is defined
-                                    database, schema = components[0], components[1]
-                                    # Check database hardcoding
-                                    if not database.startswith("${"):
-                                        print(
-                                            f"❌ Hard-coded Database in '{sql_param}' for Component '{comp_name}': {database}. "
-                                            f"Must use variable format ${...}."
-                                        )
-                                        issues_found = True
-                                    # Check schema hardcoding
-                                    if not schema.startswith("${"):
-                                        print(
-                                            f"❌ Hard-coded Schema in '{sql_param}' for Component '{comp_name}': {schema}. "
-                                            f"Must use variable format ${...}."
-                                        )
-                                        issues_found = True
-                                else:
+                                # Split into components: Database and Schema
+                                database, schema = match.split(".")
+                                # Check database hardcoding
+                                if not database.startswith("${"):
                                     print(
-                                        f"⚠️ Invalid format in '{sql_param}' for Component '{comp_name}': {match}. "
-                                        f"Expected Database.Schema.Table."
+                                        f"❌ Hard-coded Database in '{sql_param}' for Component '{comp_name}': {database}. "
+                                        f"Must use variable format ${...}."
+                                    )
+                                    issues_found = True
+                                # Check schema hardcoding
+                                if not schema.startswith("${"):
+                                    print(
+                                        f"❌ Hard-coded Schema in '{sql_param}' for Component '{comp_name}': {schema}. "
+                                        f"Must use variable format ${...}."
                                     )
                                     issues_found = True
 
