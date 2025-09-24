@@ -1,0 +1,231 @@
+type: "orchestration"
+version: "1.0"
+pipeline:
+  components:
+    Start:
+      type: "start"
+      transitions:
+        unconditional:
+        - "Database Query"
+        - "DynamoDB Query"
+        - "Email Query"
+        - "Excel Query"
+        - "MongoDB Query"
+        - "Salesforce Query"
+        - "RDS Query"
+      parameters:
+        componentName: "Start"
+    Database Query:
+      type: "database-query"
+      parameters:
+        componentName: "Database Query"
+        basicAdvancedMode: "Advanced"
+        databaseType: "SQL Server (Microsoft Driver)"
+        connectionUrl:
+        username:
+        password:
+        connectionOptions:
+        sqlQuery: "select ..."
+        fetchSize:
+        type: "Standard"
+        primaryKeys:
+        warehouse1: "[Environment Default]"
+        database: "[Environment Default]"
+        schema: "[Environment Default]"
+        targetTable:
+        stage1: "[Custom]"
+        stagePlatform: "Snowflake Managed"
+        loadOptions:
+        sshTunnel:
+      postProcessing:
+        updateOutputMessage:
+        updateScalarVariables:
+    DynamoDB Query:
+      type: "dynamodb-query"
+      parameters:
+        componentName: "DynamoDB Query"
+        basicAdvancedMode: "Advanced"
+        authenticationMethod: "Environment Credentials"
+        region: "NORTHERNVIRGINIA"
+        connectionOptions:
+        sqlQuery: "SELECT ..."
+        type: "Standard"
+        primaryKeys:
+        warehouse1: "[Environment Default]"
+        database: "[Environment Default]"
+        schema: "[Environment Default]"
+        targetTable:
+        stage1: "[Custom]"
+        stagePlatform: "Snowflake Managed"
+        loadOptions:
+        autoDebug: "Off"
+      postProcessing:
+        updateOutputMessage:
+        updateScalarVariables:
+    Email Query:
+      type: "email-query"
+      parameters:
+        componentName: "Email Query"
+        basicAdvancedMode: "Advanced"
+        provider:
+        user:
+        password:
+        imapServer:
+        imapPort:
+        connectionOptions:
+        sqlQuery: "SELECT ..."
+        type: "Standard"
+        primaryKeys:
+        warehouse: "[Environment Default]"
+        database: "[Environment Default]"
+        schema: "[Environment Default]"
+        targetTable:
+        stage: "[Custom]"
+        stagePlatform: "Snowflake Managed"
+        loadOptions:
+        autoDebug: "Off"
+      postProcessing:
+        updateOutputMessage:
+        updateScalarVariables:
+    Excel Query:
+      type: "excel-query"
+      parameters:
+        componentName: "Excel Query"
+        basicAdvancedMode: "Advanced"
+        storageType: "Amazon S3 Storage"
+        storageUrl:
+        containsHeaderRow: "Yes"
+        connectionOptions:
+        sqlQuery: "SELECT ..."
+        type: "Standard"
+        primaryKeys:
+        warehouse: "[Environment Default]"
+        database: "[Environment Default]"
+        schema: "[Environment Default]"
+        targetTable:
+        stage: "[Custom]"
+        stagePlatform: "Snowflake Managed"
+        loadOptions:
+        autoDebug: "Off"
+      postProcessing:
+        updateOutputMessage:
+        updateScalarVariables:
+    MongoDB Query:
+      type: "mongodb-query"
+      parameters:
+        componentName: "MongoDB Query"
+        basicAdvancedMode: "Advanced"
+        port:
+        username:
+        password:
+        server:
+        database2:
+        flattenObjects: "No"
+        flattenArrays: "0"
+        connectionOptions:
+        sqlQuery: "SELECT ..."
+        type: "Standard"
+        primaryKeys:
+        warehouse: "[Environment Default]"
+        database: "[Environment Default]"
+        schema: "[Environment Default]"
+        targetTable:
+        stage: "[Custom]"
+        stagePlatform: "Snowflake Managed"
+        loadOptions:
+        autoDebug: "Off"
+      postProcessing:
+        updateOutputMessage:
+        updateScalarVariables:
+    Salesforce Query:
+      type: "salesforce-query"
+      parameters:
+        componentName: "Salesforce Query"
+        basicAdvancedMode: "Advanced"
+        authenticationMethod: "User/Password"
+        useSandbox: "No"
+        username:
+        password:
+        securityToken:
+        connectionOptions:
+        sqlQuery: "SELECT ..."
+        type: "Standard"
+        primaryKeys:
+        warehouse: "[Environment Default]"
+        database: "[Environment Default]"
+        schema: "[Environment Default]"
+        targetTable:
+        stage: "[Custom]"
+        stagePlatform: "Snowflake Managed"
+        loadOptions:
+        autoDebug: "Off"
+      postProcessing:
+        updateOutputMessage:
+        updateScalarVariables:
+    RDS Query:
+      type: "rds-query"
+      parameters:
+        componentName: "RDS Query"
+        basicAdvancedMode: "Advanced"
+        databaseType: "postgresql"
+        rdsEndpoint:
+        databaseName:
+        username:
+        password:
+        sqlQuery: "select ..."
+        jdbcOptions:
+        type: "Standard"
+        primaryKeys:
+        warehouse: "[Environment Default]"
+        database: "[Environment Default]"
+        schema: "[Environment Default]"
+        targetTable:
+        stage: "[Custom]"
+        stagePlatform: "Snowflake Managed"
+        loadOptions:
+        sshTunnel:
+      postProcessing:
+        updateOutputMessage:
+        updateScalarVariables:
+design:
+  components:
+    Start:
+      position:
+        x: -560
+        "y": -30
+      tempMetlId: 1
+    Database Query:
+      position:
+        x: -390
+        "y": -230
+      tempMetlId: 2
+    DynamoDB Query:
+      position:
+        x: -380
+        "y": -140
+      tempMetlId: 3
+    Email Query:
+      position:
+        x: -370
+        "y": -60
+      tempMetlId: 4
+    Excel Query:
+      position:
+        x: -380
+        "y": 60
+      tempMetlId: 5
+    MongoDB Query:
+      position:
+        x: -380
+        "y": 150
+      tempMetlId: 6
+    Salesforce Query:
+      position:
+        x: -360
+        "y": 270
+      tempMetlId: 7
+    RDS Query:
+      position:
+        x: -360
+        "y": 380
+      tempMetlId: 8

@@ -1,0 +1,136 @@
+type: "orchestration"
+version: "1.0"
+pipeline:
+  components:
+    Start:
+      type: "start"
+      transitions:
+        unconditional:
+        - "Append To Grid"
+        - "JDBC Table Metadata To Grid"
+        - "Query Result To Grid"
+        - "Query Result To Scalar"
+        - "Remove From Grid"
+        - "Table Metadata To Grid"
+      parameters:
+        componentName: "Start"
+    Append To Grid:
+      type: "append-to-grid"
+      parameters:
+        componentName: "Append To Grid"
+        operation: "Append"
+        targetGridVariable:
+        valuesGrid:
+      postProcessing:
+        updateOutputMessage:
+        updateScalarVariables:
+    JDBC Table Metadata To Grid:
+      type: "jdbc-metadata-to-grid-v2"
+      parameters:
+        componentName: "JDBC Table Metadata To Grid"
+        databaseType:
+        connectionUrl:
+        username:
+        keyPairAuth:
+          sshPrivateKey:
+          requiresPassphrase: "No"
+        connectionOptions:
+        schema:
+        table:
+        gridVariable:
+        gridVariableMapping:
+      postProcessing:
+        updateOutputMessage:
+        updateScalarVariables:
+    Query Result To Grid:
+      type: "query-to-grid"
+      parameters:
+        componentName: "Query Result To Grid"
+        mode: "Basic"
+        database: "[Environment Default]"
+        schema: "[Environment Default]"
+        table:
+        tableColumns:
+        orderBy:
+        sort: "Ascending"
+        limit: "100"
+        gridVariable:
+        gridVariableMapping:
+        filterConditions:
+        combineConditions: "And"
+      postProcessing:
+        updateOutputMessage:
+        updateScalarVariables:
+    Query Result To Scalar:
+      type: "query-to-scalar"
+      parameters:
+        componentName: "Query Result To Scalar"
+        mode: "Advanced"
+        query: "SELECT nvl((round(AVG(MINUTE_DIFF),2)::numeric(38,0)),15) as avg_run_time\
+          \ FROM(select DATEDIFF(MIN,START_DATE_TIME,END_DATE_TIME) AS MINUTE_DIFF\
+          \ from ${OPS_DB}.${OPS_SCHEMA}.AUDIT_TABLE WHERE JOB_NAME=UPPER('${JOB_NAME}')\
+          \ AND STATUS='FIN' and START_DATE_TIME::date>=current_date-14 )"
+        scalarVariableMapping:
+      postProcessing:
+        updateOutputMessage:
+        updateScalarVariables:
+    Remove From Grid:
+      type: "remove-from-grid"
+      parameters:
+        componentName: "Remove From Grid"
+        targetGridVariable:
+        operation: "In"
+        keyColumns:
+        valuesGrid:
+      postProcessing:
+        updateOutputMessage:
+        updateScalarVariables:
+    Table Metadata To Grid:
+      type: "table-metadata-to-grid"
+      parameters:
+        componentName: "Table Metadata To Grid"
+        database: "[Environment Default]"
+        schema: "[Environment Default]"
+        gridVariable:
+        gridVariableMapping:
+        targetTable:
+      postProcessing:
+        updateOutputMessage:
+        updateScalarVariables:
+design:
+  components:
+    Start:
+      position:
+        x: -20
+        "y": 120
+      tempMetlId: 1
+    Append To Grid:
+      position:
+        x: 160
+        "y": 0
+      tempMetlId: 2
+    JDBC Table Metadata To Grid:
+      position:
+        x: 160
+        "y": -120
+      tempMetlId: 3
+    Query Result To Grid:
+      position:
+        x: 160
+        "y": 120
+      tempMetlId: 4
+    Query Result To Scalar:
+      position:
+        x: 170
+        "y": 220
+      tempMetlId: 5
+    Remove From Grid:
+      position:
+        x: 180
+        "y": 340
+      tempMetlId: 6
+    Table Metadata To Grid:
+      position:
+        x: 190
+        "y": 460
+      tempMetlId: 7

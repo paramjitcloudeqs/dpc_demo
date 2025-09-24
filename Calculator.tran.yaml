@@ -117,8 +117,8 @@ design:
   components:
     M_STUDENT:
       position:
-        x: 192
-        "y": 96
+        x: 190
+        "y": 100
       tempMetlId: 1191019
     CITY_ShortForm:
       position:
