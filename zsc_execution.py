@@ -137,6 +137,8 @@ def hardcoding_quality_checks():
                     if "schema" in params and not str(params["schema"]).startswith("${"):
                         print(f"❌ Hard coded schema in Component name {comp_name}: {params['schema']}")
                         issues_found = True
+                    else:
+                        print(f" No hard coded issues found in pipeline: {pipeline_path}")
 
         if not issues_found:
             print("✅ No hardcoding issues found in pipelines.")
