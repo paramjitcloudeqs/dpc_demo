@@ -29,7 +29,7 @@ pipeline:
         fetchSize:
         type: "Standard"
         primaryKeys:
-        warehouse1: "[Environment Default]"
+        warehouse1: "TEST"
         database: "[Environment Default]"
         schema: "[Environment Default]"
         targetTable:
@@ -51,7 +51,7 @@ pipeline:
         sqlQuery: "SELECT ..."
         type: "Standard"
         primaryKeys:
-        warehouse1: "[Environment Default]"
+        warehouse1: "TEST2"
         database: "[Environment Default]"
         schema: "[Environment Default]"
         targetTable:
