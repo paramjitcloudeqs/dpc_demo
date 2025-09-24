@@ -68,8 +68,8 @@ pipeline:
         mode: "Advanced"
         query: "SELECT nvl((round(AVG(MINUTE_DIFF),2)::numeric(38,0)),15) as avg_run_time\
           \ FROM(select DATEDIFF(MIN,START_DATE_TIME,END_DATE_TIME) AS MINUTE_DIFF\
-          \ from ${OPS_DB}.${OPS_SCHEMA}.AUDIT_TABLE WHERE JOB_NAME=UPPER('${JOB_NAME}')\
-          \ AND STATUS='FIN' and START_DATE_TIME::date>=current_date-14 )"
+          \ from TEST.TEATINT.AUDIT_TABLE WHERE JOB_NAME=UPPER('${JOB_NAME}') AND\
+          \ STATUS='FIN' and START_DATE_TIME::date>=current_date-14 )"
         scalarVariableMapping:
       postProcessing:
         updateOutputMessage:
@@ -101,8 +101,8 @@ design:
   components:
     Start:
       position:
-        x: -60
-        "y": 170
+        x: -140
+        "y": 60
       tempMetlId: 1
     Append To Grid:
       position:
