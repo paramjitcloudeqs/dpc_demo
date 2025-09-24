@@ -6,67 +6,12 @@ pipeline:
       type: "start"
       transitions:
         unconditional:
-        - "Create External Table"
-        - "Create Table"
         - "Create Stream"
-        - "Delete Tables"
-        - "Refresh External Table"
         - "SQL Script"
         - "Truncate Table"
         - "Alter Table"
       parameters:
         componentName: "Start"
-    Create External Table:
-      type: "create-external-table-sf"
-      parameters:
-        componentName: "Create External Table"
-        createReplace: "Create"
-        database: "[Environment Default]"
-        schema: "[Environment Default]"
-        newTableName:
-        partitionColumns:
-        stageDatabase: "[Environment Default]"
-        stageSchema: "[Environment Default]"
-        stage:
-        relativePath:
-        pattern:
-        format: "[Custom]"
-        fileType: "CSV"
-        compression: "AUTO"
-        recordDelimiter:
-        fieldDelimiter:
-        skipHeader:
-        skipBlankLines: "False"
-        escape:
-        escapeUnenclosedField:
-        trimSpace2: "False"
-        fieldOptionallyEnclosed:
-        nullIf2:
-        errorOnColumnCountMismatch: "False"
-        emptyFieldAsNull: "True"
-        replaceInvalidCharacters: "False"
-        encodingType:
-      postProcessing:
-        updateOutputMessage:
-        updateScalarVariables:
-    Create Table:
-      type: "create-table-v2"
-      parameters:
-        componentName: "Create Table"
-        createMethod: "Create"
-        database: "[Environment Default]"
-        schema: "[Environment Default]"
-        table:
-        snowflakeTableType: "Permanent"
-        columns:
-        defaultDdlCollation:
-        primaryKeys:
-        clusteringKeys:
-        dataRetentionTimeInDays:
-        comment:
-      postProcessing:
-        updateOutputMessage:
-        updateScalarVariables:
     Create Stream:
       type: "create-stream"
       parameters:
@@ -82,28 +27,6 @@ pipeline:
       postProcessing:
         updateOutputMessage:
         updateScalarVariables:
-    Delete Tables:
-      type: "delete-tables"
-      parameters:
-        componentName: "Delete Tables"
-        database: "[Environment Default]"
-        schema: "[Environment Default]"
-        targetTable:
-        ignoreMissing: "Yes"
-      postProcessing:
-        updateOutputMessage:
-        updateScalarVariables:
-    Refresh External Table:
-      type: "refresh-external-table"
-      parameters:
-        componentName: "Refresh External Table"
-        database: "[Environment Default]"
-        schema: "[Environment Default]"
-        targetTable:
-        relativeSubpath:
-      postProcessing:
-        updateOutputMessage:
-        updateScalarVariables:
     SQL Script:
       type: "sql-executor"
       parameters:
@@ -111,7 +34,7 @@ pipeline:
         scriptLocation: "Component"
         declareSqlVariables: "Include selected"
         variablesToInclude:
-        sqlScript: "select * from INTERNAL_TRAINING.DBT_MKHAMBADKAR.DPC_MTLN_TEST_1;"
+        sqlScript: "select * from ${INTERNAL_TRAINING.DBT_MKHAMBADKAR.DPC_MTLN_TEST_1;"
       postProcessing:
         updateOutputMessage:
         updateScalarVariables:
@@ -144,43 +67,23 @@ design:
         x: -230
         "y": -90
       tempMetlId: 1
-    Create External Table:
-      position:
-        x: 260
-        "y": 10
-      tempMetlId: 2
-    Create Table:
-      position:
-        x: 210
-        "y": -90
-      tempMetlId: 3
     Create Stream:
       position:
         x: 230
-        "y": 120
+        "y": -100
       tempMetlId: 4
-    Delete Tables:
-      position:
-        x: 220
-        "y": -180
-      tempMetlId: 5
-    Refresh External Table:
-      position:
-        x: 150
-        "y": -260
-      tempMetlId: 6
     SQL Script:
       position:
-        x: 260
-        "y": 200
+        x: 230
+        "y": 10
       tempMetlId: 7
     Truncate Table:
       position:
-        x: 160
-        "y": 240
+        x: 210
+        "y": 130
       tempMetlId: 8
     Alter Table:
       position:
-        x: -10
-        "y": -250
+        x: 140
+        "y": -230
       tempMetlId: 9
