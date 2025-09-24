@@ -7,7 +7,7 @@ pipeline:
       parameters:
         componentName: "M_STUDENT"
         database: "${env_database}"
-        schema: "${env_schema}"
+        schema: "DBT_MKHAMBADKAR"
         targetTable: "M_STUDENT"
         columnNames:
         - "ID"
@@ -64,8 +64,8 @@ design:
   components:
     M_STUDENT:
       position:
-        x: 300
-        "y": 50
+        x: 310
+        "y": 60
       tempMetlId: 1184069
     Rename (ID->Rename_ID,Name->Rename->Rename_Name..):
       position:
