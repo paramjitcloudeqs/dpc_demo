@@ -111,7 +111,7 @@ pipeline:
         scriptLocation: "Component"
         declareSqlVariables: "Include selected"
         variablesToInclude:
-        sqlScript: "select * from INTERNAL_TRAINING.DBT_MKHAMBADKAR.DPC_MTLN_TEST_1"
+        sqlScript: "select * from INTERNAL_TRAINING.DBT_MKHAMBADKAR.DPC_MTLN_TEST_1;"
       postProcessing:
         updateOutputMessage:
         updateScalarVariables:
@@ -141,8 +141,8 @@ design:
   components:
     Start:
       position:
-        x: -220
-        "y": 0
+        x: -230
+        "y": -90
       tempMetlId: 1
     Create External Table:
       position:
@@ -171,8 +171,8 @@ design:
       tempMetlId: 6
     SQL Script:
       position:
-        x: 250
-        "y": 220
+        x: 260
+        "y": 200
       tempMetlId: 7
     Truncate Table:
       position:
