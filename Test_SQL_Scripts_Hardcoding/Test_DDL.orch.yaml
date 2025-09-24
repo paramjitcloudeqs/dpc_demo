@@ -6,27 +6,9 @@ pipeline:
       type: "start"
       transitions:
         unconditional:
-        - "Create Stream"
         - "SQL Script"
-        - "Truncate Table"
-        - "Alter Table"
       parameters:
         componentName: "Start"
-    Create Stream:
-      type: "create-stream"
-      parameters:
-        componentName: "Create Stream"
-        createReplace: "Create"
-        database: "[Environment Default]"
-        schema: "[Environment Default]"
-        streamName:
-        tableDatabase: "[Environment Default]"
-        tableSchema: "[Environment Default]"
-        table:
-        appendOnly: "False"
-      postProcessing:
-        updateOutputMessage:
-        updateScalarVariables:
     SQL Script:
       type: "sql-executor"
       parameters:
@@ -34,29 +16,7 @@ pipeline:
         scriptLocation: "Component"
         declareSqlVariables: "Include selected"
         variablesToInclude:
-        sqlScript: "select * from ${INTERNAL_TRAINING}.DBT_MKHAMBADKAR.DPC_MTLN_TEST_1;"
-      postProcessing:
-        updateOutputMessage:
-        updateScalarVariables:
-    Truncate Table:
-      type: "truncate-table"
-      parameters:
-        componentName: "Truncate Table"
-        warehouse: "[Environment Default]"
-        database: "[Environment Default]"
-        schema: "[Environment Default]"
-        targetTable:
-      postProcessing:
-        updateOutputMessage:
-        updateScalarVariables:
-    Alter Table:
-      type: "alter-table"
-      parameters:
-        componentName: "Alter Table"
-        targetTable:
-        schema: "[Environment Default]"
-        database: "[Environment Default]"
-        searchOptimizationService: "Off"
+        sqlScript: "select * from INTERNAL_TRAINING.DBT_MKHAMBADKAR.DPC_MTLN_TEST_1;"
       postProcessing:
         updateOutputMessage:
         updateScalarVariables:
@@ -67,23 +27,8 @@ design:
         x: -230
         "y": -90
       tempMetlId: 1
-    Create Stream:
-      position:
-        x: 230
-        "y": -100
-      tempMetlId: 4
     SQL Script:
       position:
-        x: 230
-        "y": 10
+        x: -40
+        "y": -90
       tempMetlId: 7
-    Truncate Table:
-      position:
-        x: 210
-        "y": 130
-      tempMetlId: 8
-    Alter Table:
-      position:
-        x: 140
-        "y": -230
-      tempMetlId: 9
