@@ -34,7 +34,7 @@ pipeline:
         scriptLocation: "Component"
         declareSqlVariables: "Include selected"
         variablesToInclude:
-        sqlScript: "select * from INTERNAL_TRAINING.${DBT_MKHAMBADKAR}.DPC_MTLN_TEST_1;"
+        sqlScript: "select * from ${INTERNAL_TRAINING}.${DBT_MKHAMBADKAR}.DPC_MTLN_TEST_1;"
       postProcessing:
         updateOutputMessage:
         updateScalarVariables:
