@@ -6,8 +6,8 @@ pipeline:
       type: "table-input"
       parameters:
         componentName: "M_STUDENT"
-        database: "INTERNAL_TRAINING"
-        schema: "DBT_MKHAMBADKAR"
+        database: "${jv_database}"
+        schema: "${jv_schema}"
         targetTable: "M_STUDENT"
         columnNames:
         - "ID"
@@ -91,13 +91,28 @@ pipeline:
       parameters:
         componentName: "Rewrite Table"
         warehouse: "[Environment Default]"
-        database: "INTERNAL_TRAINING"
-        schema: "DBT_MKHAMBADKAR"
+        database: "${jv_database}"
+        schema: "${jv_schema}"
         targetTable: "DPC_MTLN_TEST_2"
         orderBy:
       postProcessing:
         updateOutputMessage: "Table Created Succefully."
         updateScalarVariables:
+  variables:
+    jv_database:
+      metadata:
+        type: "TEXT"
+        description: ""
+        scope: "SHARED"
+        visibility: "PUBLIC"
+      defaultValue: "INTERNAL_TRAINING"
+    jv_schema:
+      metadata:
+        type: "TEXT"
+        description: ""
+        scope: "SHARED"
+        visibility: "PUBLIC"
+      defaultValue: "DBT_MKHAMBADKAR"
 design:
   components:
     M_STUDENT:
@@ -112,8 +127,8 @@ design:
       tempMetlId: 1191082
     Left Join:
       position:
-        x: 407
-        "y": 175
+        x: 410
+        "y": 200
       tempMetlId: 1191150
     Calculator 0:
       position:

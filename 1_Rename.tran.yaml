@@ -6,8 +6,8 @@ pipeline:
       type: "table-input"
       parameters:
         componentName: "M_STUDENT"
-        database: "INTERNAL_TRAINING"
-        schema: "DBT_MKHAMBADKAR"
+        database: "${env_database}"
+        schema: "${env_schema}"
         targetTable: "M_STUDENT"
         columnNames:
         - "ID"
@@ -37,14 +37,29 @@ pipeline:
       - "Rename (ID->Rename_ID,Name->Rename->Rename_Name..)"
       parameters:
         componentName: "Rewrite Table"
-        warehouse: "COMPUTE_WH"
-        database: "INTERNAL_TRAINING"
-        schema: "DBT_MKHAMBADKAR"
+        warehouse: "[Environment Default]"
+        database: "${env_database}"
+        schema: "${env_schema}"
         targetTable: "DPC_MTLN_TEST_1"
         orderBy:
       postProcessing:
         updateOutputMessage:
         updateScalarVariables:
+  variables:
+    env_schema:
+      metadata:
+        type: "TEXT"
+        description: ""
+        scope: "SHARED"
+        visibility: "PUBLIC"
+      defaultValue: "DBT_MKHAMBADKAR"
+    env_database:
+      metadata:
+        type: "TEXT"
+        description: ""
+        scope: "SHARED"
+        visibility: "PUBLIC"
+      defaultValue: "INTERNAL_TRAINING"
 design:
   components:
     M_STUDENT:
@@ -54,8 +69,8 @@ design:
       tempMetlId: 1184069
     Rename (ID->Rename_ID,Name->Rename->Rename_Name..):
       position:
-        x: 540
-        "y": 70
+        x: 520
+        "y": 50
       tempMetlId: 1184072
     Rewrite Table:
       position:
