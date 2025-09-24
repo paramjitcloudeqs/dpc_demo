@@ -36,5 +36,5 @@ design:
     Calculator:
       position:
         x: 290
-        "y": -160
+        "y": -140
       tempMetlId: 3
