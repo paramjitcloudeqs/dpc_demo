@@ -4,6 +4,7 @@ from datetime import datetime
 import io
 import os
 import yaml
+import re
 
 client_id = os.getenv("CLIENT_ID")
 client_secret = os.getenv("CLIENT_SECRET")
@@ -157,6 +158,22 @@ def hardcoding_quality_checks():
                     if "tableSchema" in params and not str(params["tableSchema"]).startswith("${"):
                         print(f"❌ Hard coded tableSchema in Component name {comp_name}: {params['tableSchema']}")
                         issues_found = True
+
+                    # Checking hardcoded database and schema references within sqlScript, sqlQuery, and query
+                    for sql_param in ["sqlScript", "sqlQuery", "query"]:
+                        if sql_param in params and isinstance(params[sql_param], str):
+                            sql_content = params[sql_param]
+                            # Regex pattern to search for hardcoded database.schema.table
+                            matches = re.findall(r"[a-zA-Z_]+(?:\.[a-zA-Z_]+)+", sql_content)
+
+
+                            for match in matches:
+                                if not match.startswith("${"):
+                                    print(
+                                        f"❌ Hard-coded value in {sql_param} for Component '{comp_name}': {match}. "
+                                        f"Must use variables in the form ${...}."
+                                    )
+                                    issues_found = True
 
         if not issues_found:
             print("✅ No hardcoding issues found in pipelines.")
