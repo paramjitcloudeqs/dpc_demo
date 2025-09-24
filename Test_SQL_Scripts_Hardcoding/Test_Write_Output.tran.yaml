@@ -68,7 +68,7 @@ design:
     Rewrite Table:
       position:
         x: 110
-        "y": -10
+        "y": 10
       tempMetlId: 2
     Table Output:
       position:

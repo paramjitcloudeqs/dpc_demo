@@ -141,7 +141,7 @@ design:
   components:
     Start:
       position:
-        x: 0
+        x: -90
         "y": 0
       tempMetlId: 1
     Create External Table:
