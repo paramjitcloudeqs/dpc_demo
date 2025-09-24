@@ -137,8 +137,26 @@ def hardcoding_quality_checks():
                     if "schema" in params and not str(params["schema"]).startswith("${"):
                         print(f"❌ Hard coded schema in Component name {comp_name}: {params['schema']}")
                         issues_found = True
-                    # else:
-                    #     print(f" No hard coded issues found in pipeline: {pipeline_path}")
+                    
+                    # --- Check stageDatabase ---
+                    if "stageDatabase" in params and not str(params["stageDatabase"]).startswith("${"):
+                            print(f"❌ Hard coded stageDatabase in Component name {comp_name}: {params['stageDatabase']}")
+                            issues_found = True
+
+                    # --- Check stageSchema ---
+                    if "stageSchema" in params and not str(params["stageSchema"]).startswith("${"):
+                        print(f"❌ Hard coded stageSchema in Component name {comp_name}: {params['stageSchema']}")
+                        issues_found = True
+
+                    # --- Check tableDatabase ---
+                    if "tableDatabase" in params and not str(params["tableDatabase"]).startswith("${"):
+                        print(f"❌ Hard coded tableDatabase in Component name {comp_name}: {params['tableDatabase']}")
+                        issues_found = True
+
+                    # --- Check tableSchema ---
+                    if "tableSchema" in params and not str(params["tableSchema"]).startswith("${"):
+                        print(f"❌ Hard coded tableSchema in Component name {comp_name}: {params['tableSchema']}")
+                        issues_found = True
 
         if not issues_found:
             print("✅ No hardcoding issues found in pipelines.")
