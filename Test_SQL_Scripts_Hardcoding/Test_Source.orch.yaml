@@ -17,6 +17,7 @@ pipeline:
         componentName: "Start"
     Database Query:
       type: "database-query"
+      skipped: false
       parameters:
         componentName: "Database Query"
         basicAdvancedMode: "Advanced"
@@ -25,7 +26,9 @@ pipeline:
         username:
         password:
         connectionOptions:
-        sqlQuery: "select ..."
+        sqlQuery: "select ...\r\n\r\nSELECT nvl((round(AVG(MINUTE_DIFF),2)::numeric(38,0)),15)\
+          \ as avg_run_time FROM(select DATEDIFF(MIN,START_DATE_TIME,END_DATE_TIME)\
+          \ AS MINUTE_DIFF from ${OPS_DB}.${OPS_SCHEMA}.AUDIT_TABLE WHERE "
         fetchSize:
         type: "Standard"
         primaryKeys:
@@ -48,7 +51,7 @@ pipeline:
         authenticationMethod: "Environment Credentials"
         region: "NORTHERNVIRGINIA"
         connectionOptions:
-        sqlQuery: "SELECT ..."
+        sqlQuery: "select * from INTERNAL_TRAINING.DBT_MKHAMBADKAR.DPC_MTLN_TEST_1;"
         type: "Standard"
         primaryKeys:
         warehouse1: "TEST2"
@@ -73,7 +76,7 @@ pipeline:
         imapServer:
         imapPort:
         connectionOptions:
-        sqlQuery: "SELECT ..."
+        sqlQuery: "SELECT "
         type: "Standard"
         primaryKeys:
         warehouse: "[Environment Default]"
@@ -123,7 +126,7 @@ pipeline:
         flattenObjects: "No"
         flattenArrays: "0"
         connectionOptions:
-        sqlQuery: "SELECT ..."
+        sqlQuery: "select * from INTERNAL_TRAINING.DBT_MKHAMBADKAR.DPC_MTLN_TEST_1;"
         type: "Standard"
         primaryKeys:
         warehouse: "[Environment Default]"
