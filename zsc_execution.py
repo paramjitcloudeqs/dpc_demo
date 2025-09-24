@@ -122,50 +122,50 @@ def hardcoding_quality_checks():
                 for comp_name, comp_def in components.items():
                     params = comp_def.get("parameters", {})
 
-                    
+                    print(" ❌Hardcoding quality checks are as follows:")
                     # --- Check warehouse ---
                     if "warehouse" in params and params["warehouse"] != "[Environment Default]":
-                        print(f"❌ Hard coded warehouse in Component name {comp_name}: {params['warehouse']}")
+                        print(f" warehouse in Component name {comp_name}: {params['warehouse']}")
                         issues_found = True
 
                     # --- Check warehouse1 ---
                     if "warehouse1" in params and params["warehouse1"] != "[Environment Default]":
-                        print(f"❌ Hard coded warehouse1 in Component name {comp_name}: {params['warehouse1']}")
+                        print(f" warehouse1 in Component name {comp_name}: {params['warehouse1']}")
                         issues_found = True
 
                     # --- Check database ---
                     if "database" in params and not str(params["database"]).startswith("${"):
-                        print(f"❌ Hard coded database in Component name {comp_name}: {params['database']}")
+                        print(f" database in Component name {comp_name}: {params['database']}")
                         issues_found = True
-                        
+
                     # --- Check database1 ---
                     if "database1" in params and not str(params["database1"]).startswith("${"):
-                        print(f"❌ Hard coded database1 in Component name {comp_name}: {params['database1']}")
+                        print(f" database1 in Component name {comp_name}: {params['database1']}")
                         issues_found = True
 
                     # --- Check schema ---
                     if "schema" in params and not str(params["schema"]).startswith("${"):
-                        print(f"❌ Hard coded schema in Component name {comp_name}: {params['schema']}")
+                        print(f" schema in Component name {comp_name}: {params['schema']}")
                         issues_found = True
                     
                     # --- Check stageDatabase ---
                     if "stageDatabase" in params and not str(params["stageDatabase"]).startswith("${"):
-                            print(f"❌ Hard coded stageDatabase in Component name {comp_name}: {params['stageDatabase']}")
-                            issues_found = True
+                        print(f" stageDatabase in Component name {comp_name}: {params['stageDatabase']}")
+                        issues_found = True
 
                     # --- Check stageSchema ---
                     if "stageSchema" in params and not str(params["stageSchema"]).startswith("${"):
-                        print(f"❌ Hard coded stageSchema in Component name {comp_name}: {params['stageSchema']}")
+                        print(f" stageSchema in Component name {comp_name}: {params['stageSchema']}")
                         issues_found = True
 
                     # --- Check tableDatabase ---
                     if "tableDatabase" in params and not str(params["tableDatabase"]).startswith("${"):
-                        print(f"❌ Hard coded tableDatabase in Component name {comp_name}: {params['tableDatabase']}")
+                        print(f" tableDatabase in Component name {comp_name}: {params['tableDatabase']}")
                         issues_found = True
 
                     # --- Check tableSchema ---
                     if "tableSchema" in params and not str(params["tableSchema"]).startswith("${"):
-                        print(f"❌ Hard coded tableSchema in Component name {comp_name}: {params['tableSchema']}")
+                        print(f" tableSchema in Component name {comp_name}: {params['tableSchema']}")
                         issues_found = True
 
         if not issues_found:
