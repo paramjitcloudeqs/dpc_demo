@@ -91,7 +91,7 @@ pipeline:
       parameters:
         componentName: "Rewrite Table"
         warehouse: "[Environment Default]"
-        database: "INTERNAL_TRAINING"
+        database: "${jv_database}"
         schema: "${jv_schema}"
         targetTable: "DPC_MTLN_TEST_2"
         orderBy:

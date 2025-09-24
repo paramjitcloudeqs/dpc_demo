@@ -77,6 +77,6 @@ design:
       tempMetlId: 3
     Table Update:
       position:
-        x: 110
+        x: 120
         "y": 220
       tempMetlId: 4

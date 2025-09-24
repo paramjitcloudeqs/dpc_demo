@@ -35,6 +35,6 @@ design:
       tempMetlId: 2
     Calculator:
       position:
-        x: 290
+        x: 300
         "y": -140
       tempMetlId: 3
