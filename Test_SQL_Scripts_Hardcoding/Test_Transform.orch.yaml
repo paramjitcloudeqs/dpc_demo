@@ -101,8 +101,8 @@ design:
   components:
     Start:
       position:
-        x: -20
-        "y": 120
+        x: -60
+        "y": 170
       tempMetlId: 1
     Append To Grid:
       position:

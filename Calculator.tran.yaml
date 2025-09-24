@@ -91,7 +91,7 @@ pipeline:
       parameters:
         componentName: "Rewrite Table"
         warehouse: "[Environment Default]"
-        database: "INTERNAL_TRAINING"
+        database: "${jv_database}"
         schema: "${jv_schema}"
         targetTable: "DPC_MTLN_TEST_2"
         orderBy:
@@ -132,8 +132,8 @@ design:
       tempMetlId: 1191150
     Calculator 0:
       position:
-        x: 608
-        "y": 176
+        x: 610
+        "y": 200
       tempMetlId: 1191164
     Rewrite Table:
       position:
