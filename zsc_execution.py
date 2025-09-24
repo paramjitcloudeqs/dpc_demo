@@ -128,9 +128,19 @@ def hardcoding_quality_checks():
                         print(f"❌ Hard coded warehouse in Component name {comp_name}: {params['warehouse']}")
                         issues_found = True
 
+                    # --- Check warehouse1 ---
+                    if "warehouse1" in params and params["warehouse1"] != "[Environment Default]":
+                        print(f"❌ Hard coded warehouse1 in Component name {comp_name}: {params['warehouse1']}")
+                        issues_found = True
+
                     # --- Check database ---
                     if "database" in params and not str(params["database"]).startswith("${"):
                         print(f"❌ Hard coded database in Component name {comp_name}: {params['database']}")
+                        issues_found = True
+                        
+                    # --- Check database1 ---
+                    if "database1" in params and not str(params["database1"]).startswith("${"):
+                        print(f"❌ Hard coded database1 in Component name {comp_name}: {params['database1']}")
                         issues_found = True
 
                     # --- Check schema ---
