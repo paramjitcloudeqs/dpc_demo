@@ -1,0 +1,40 @@
+type: "transformation"
+version: "1.0"
+pipeline:
+  components:
+    Aggregate:
+      type: "aggregate"
+      parameters:
+        componentName: "Aggregate"
+        groupings:
+        aggregations:
+        groupingType: "Group By"
+    Construct Variant:
+      type: "construct-variant"
+      parameters:
+        componentName: "Construct Variant"
+        columnMappings:
+        outputSlot: "data"
+    Calculator:
+      type: "calculator"
+      parameters:
+        componentName: "Calculator"
+        includeInputColumns: "Yes"
+        calculations:
+design:
+  components:
+    Aggregate:
+      position:
+        x: 290
+        "y": -240
+      tempMetlId: 1
+    Construct Variant:
+      position:
+        x: 290
+        "y": -50
+      tempMetlId: 2
+    Calculator:
+      position:
+        x: 290
+        "y": -160
+      tempMetlId: 3

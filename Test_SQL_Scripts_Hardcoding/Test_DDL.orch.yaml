@@ -13,6 +13,7 @@ pipeline:
         - "Refresh External Table"
         - "SQL Script"
         - "Truncate Table"
+        - "Alter Table"
       parameters:
         componentName: "Start"
     Create External Table:
@@ -125,12 +126,23 @@ pipeline:
       postProcessing:
         updateOutputMessage:
         updateScalarVariables:
+    Alter Table:
+      type: "alter-table"
+      parameters:
+        componentName: "Alter Table"
+        targetTable:
+        schema: "[Environment Default]"
+        database: "[Environment Default]"
+        searchOptimizationService: "Off"
+      postProcessing:
+        updateOutputMessage:
+        updateScalarVariables:
 design:
   components:
     Start:
       position:
-        x: -10
-        "y": 30
+        x: 0
+        "y": 0
       tempMetlId: 1
     Create External Table:
       position:
@@ -150,12 +162,12 @@ design:
     Delete Tables:
       position:
         x: 220
-        "y": -210
+        "y": -180
       tempMetlId: 5
     Refresh External Table:
       position:
-        x: 80
-        "y": -270
+        x: 150
+        "y": -260
       tempMetlId: 6
     SQL Script:
       position:
@@ -167,3 +179,8 @@ design:
         x: 160
         "y": 240
       tempMetlId: 8
+    Alter Table:
+      position:
+        x: -10
+        "y": -250
+      tempMetlId: 9

@@ -1,0 +1,82 @@
+type: "transformation"
+version: "1.0"
+pipeline:
+  components:
+    Create View:
+      type: "create-view"
+      parameters:
+        componentName: "Create View"
+        database: "[Environment Default]"
+        schema: "[Environment Default]"
+        viewName:
+        secureView: "No"
+        viewType: "Standard"
+      postProcessing:
+        updateOutputMessage:
+        updateScalarVariables:
+    Rewrite Table:
+      type: "rewrite-table"
+      parameters:
+        componentName: "Rewrite Table"
+        warehouse: "[Environment Default]"
+        database: "[Environment Default]"
+        schema: "[Environment Default]"
+        targetTable:
+        orderBy:
+      postProcessing:
+        updateOutputMessage:
+        updateScalarVariables:
+    Table Output:
+      type: "table-output"
+      parameters:
+        componentName: "Table Output"
+        warehouse: "[Environment Default]"
+        database: "[Environment Default]"
+        schema: "[Environment Default]"
+        targetTable:
+        fixDataTypeMismatches: "No"
+        columnMapping:
+        orderBy:
+        outputMode: "Append"
+      postProcessing:
+        updateOutputMessage:
+        updateScalarVariables:
+    Table Update:
+      type: "table-update"
+      parameters:
+        componentName: "Table Update"
+        warehouse: "[Environment Default]"
+        database: "[Environment Default]"
+        schema: "[Environment Default]"
+        targetTable:
+        targetAlias: "target"
+        sourceAlias: "input"
+        joinExpression:
+        whenMatched:
+        updateMapping:
+        includeNotMatched: "No"
+      postProcessing:
+        updateOutputMessage:
+        updateScalarVariables:
+design:
+  components:
+    Create View:
+      position:
+        x: 110
+        "y": -110
+      tempMetlId: 1
+    Rewrite Table:
+      position:
+        x: 110
+        "y": -10
+      tempMetlId: 2
+    Table Output:
+      position:
+        x: 110
+        "y": 100
+      tempMetlId: 3
+    Table Update:
+      position:
+        x: 110
+        "y": 220
+      tempMetlId: 4
