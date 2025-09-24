@@ -160,20 +160,54 @@ def hardcoding_quality_checks():
                         issues_found = True
 
                     # Checking hardcoded database and schema references within sqlScript, sqlQuery, and query
+                    # for sql_param in ["sqlScript", "sqlQuery", "query"]:
+                    #     if sql_param in params and isinstance(params[sql_param], str):
+                    #         sql_content = params[sql_param]
+                    #         # Regex pattern to search for hardcoded database.schema.table
+                    #         matches = re.findall(r"[a-zA-Z_]+(?:\.[a-zA-Z_]+)+", sql_content)
+
+
+                    #         for match in matches:
+                    #             if not match.startswith("${"):
+                    #                 print(
+                    #                     f"❌ Hard-coded value in {sql_param} for Component '{comp_name}': {match}. "
+                    #                     f"Must use variables in the form ${...}."
+                    #                 )
+                    #                 issues_found = True
+
                     for sql_param in ["sqlScript", "sqlQuery", "query"]:
                         if sql_param in params and isinstance(params[sql_param], str):
                             sql_content = params[sql_param]
-                            # Regex pattern to search for hardcoded database.schema.table
+                            # Regex pattern to detect database.schema.table for validation
                             matches = re.findall(r"[a-zA-Z_]+(?:\.[a-zA-Z_]+)+", sql_content)
 
 
                             for match in matches:
-                                if not match.startswith("${"):
+                                # Split into components: Database, Schema, and Table
+                                components = match.split(".")
+                                if len(components) >= 2:  # Ensure at least Database.Schema is defined
+                                    database, schema = components[0], components[1]
+                                    # Check database hardcoding
+                                    if not database.startswith("${"):
+                                        print(
+                                            f"❌ Hard-coded Database in '{sql_param}' for Component '{comp_name}': {database}. "
+                                            f"Must use variable format ${...}."
+                                        )
+                                        issues_found = True
+                                    # Check schema hardcoding
+                                    if not schema.startswith("${"):
+                                        print(
+                                            f"❌ Hard-coded Schema in '{sql_param}' for Component '{comp_name}': {schema}. "
+                                            f"Must use variable format ${...}."
+                                        )
+                                        issues_found = True
+                                else:
                                     print(
-                                        f"❌ Hard-coded value in {sql_param} for Component '{comp_name}': {match}. "
-                                        f"Must use variables in the form ${...}."
+                                        f"⚠️ Invalid format in '{sql_param}' for Component '{comp_name}': {match}. "
+                                        f"Expected Database.Schema.Table."
                                     )
                                     issues_found = True
+
 
         if not issues_found:
             print("✅ No hardcoding issues found in pipelines.")
