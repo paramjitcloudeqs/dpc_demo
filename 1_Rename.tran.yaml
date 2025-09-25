@@ -70,7 +70,7 @@ design:
     Rename (ID->Rename_ID,Name->Rename->Rename_Name..):
       position:
         x: 500
-        "y": 60
+        "y": 80
       tempMetlId: 1184072
     Rewrite Table:
       position:
