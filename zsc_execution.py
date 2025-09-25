@@ -84,6 +84,7 @@ def execute_pipeline(token, pipeline_name, version_name):
     }
 
     response = requests.post(url, headers=headers, data=payload)
+    print("\nExecuting Pipelines : ")
     print(f"\nExecuted pipeline: {pipeline_name}")
     print("Status Code:", response.status_code)
     print(response.text)
