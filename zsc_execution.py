@@ -217,10 +217,11 @@ def main():
 
         hardcoding_quality_checks() # Run quality checks before publishing
 
-        publish_artifact(token)
+        # publish_artifact(token)
+        version_name = publish_artifact(token)
 
         for pipeline_name in changed_pipelines:
-            execute_pipeline(token, pipeline_name)
+            execute_pipeline(token, pipeline_name, version_name)
 
     except Exception as e:
         print(f"\nExecution failed: {e}")
