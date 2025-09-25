@@ -45,6 +45,7 @@ pipeline:
         updateScalarVariables:
     DynamoDB Query:
       type: "dynamodb-query"
+      skipped: true
       parameters:
         componentName: "DynamoDB Query"
         basicAdvancedMode: "Advanced"
@@ -92,6 +93,7 @@ pipeline:
         updateScalarVariables:
     Excel Query:
       type: "excel-query"
+      skipped: true
       parameters:
         componentName: "Excel Query"
         basicAdvancedMode: "Advanced"
@@ -142,6 +144,7 @@ pipeline:
         updateScalarVariables:
     Salesforce Query:
       type: "salesforce-query"
+      skipped: true
       parameters:
         componentName: "Salesforce Query"
         basicAdvancedMode: "Advanced"
@@ -194,8 +197,8 @@ design:
   components:
     Start:
       position:
-        x: -560
-        "y": 10
+        x: -660
+        "y": 30
       tempMetlId: 1
     Database Query:
       position:
