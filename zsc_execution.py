@@ -69,6 +69,7 @@ def publish_artifact(token):
 
 def execute_pipeline(token, pipeline_name, version_name):
     url = f"https://us1.api.matillion.com/dpc/v1/projects/{project_id}/pipeline-executions"
+    print("Version name from publish_artifact function : ",version_name)
 
     payload = json.dumps({
         "pipelineName": pipeline_name,
