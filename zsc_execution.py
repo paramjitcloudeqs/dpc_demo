@@ -121,6 +121,11 @@ def hardcoding_quality_checks():
                 # Navigate to pipeline components
                 components = pipeline_yaml.get("pipeline", {}).get("components", {})
                 for comp_name, comp_def in components.items():
+
+                    if comp_def.get("skipped", False):
+                        print(f"⏩ Skipping Component '{comp_name}' as it is marked 'skipped: true'.")
+                        continue
+
                     params = comp_def.get("parameters", {})
 
                     if "warehouse" in params and params["warehouse"] != "[Environment Default]":
@@ -159,21 +164,6 @@ def hardcoding_quality_checks():
                         print(f"❌ Hard coded tableSchema in Component name {comp_name}: {params['tableSchema']}")
                         issues_found = True
 
-                    # Checking hardcoded database and schema references within sqlScript, sqlQuery, and query
-                    # for sql_param in ["sqlScript", "sqlQuery", "query"]:
-                    #     if sql_param in params and isinstance(params[sql_param], str):
-                    #         sql_content = params[sql_param]
-                    #         # Regex pattern to search for hardcoded database.schema.table
-                    #         matches = re.findall(r"[a-zA-Z_]+(?:\.[a-zA-Z_]+)+", sql_content)
-
-
-                    #         for match in matches:
-                    #             if not match.startswith("${"):
-                    #                 print(
-                    #                     f"❌ Hard-coded value in {sql_param} for Component '{comp_name}': {match}. "
-                    #                     f"Must use variables in the form ${...}."
-                    #                 )
-                    #                 issues_found = True
 
                     for sql_param in ["sqlScript", "sqlQuery", "query"]:
                         if sql_param in params and isinstance(params[sql_param], str):
