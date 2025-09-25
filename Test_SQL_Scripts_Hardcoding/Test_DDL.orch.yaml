@@ -8,6 +8,7 @@ pipeline:
         unconditional:
         - "SQL Script"
         - "SQL Script 2"
+        - "SQL Script 3"
         - "SQL Script 4"
       parameters:
         componentName: "Start"
@@ -31,6 +32,18 @@ pipeline:
         declareSqlVariables: "Include selected"
         variablesToInclude:
         sqlScript: "select * from ${INTERNAL_TRAINING}.DBT_MKHAMBADKAR.DPC_MTLN_TEST_1;"
+      postProcessing:
+        updateOutputMessage:
+        updateScalarVariables:
+    SQL Script 3:
+      type: "sql-executor"
+      skipped: true
+      parameters:
+        componentName: "SQL Script 3"
+        scriptLocation: "Component"
+        declareSqlVariables: "Include selected"
+        variablesToInclude:
+        sqlScript: "select * from INTERNAL_TRAINING.${DBT_MKHAMBADKAR}.DPC_MTLN_TEST_1;"
       postProcessing:
         updateOutputMessage:
         updateScalarVariables:
@@ -59,11 +72,16 @@ design:
       tempMetlId: 7
     SQL Script 2:
       position:
-        x: -20
+        x: -30
         "y": -80
       tempMetlId: 8
-    SQL Script 4:
+    SQL Script 3:
       position:
         x: -30
-        "y": 60
+        "y": 30
+      tempMetlId: 9
+    SQL Script 4:
+      position:
+        x: -80
+        "y": 140
       tempMetlId: 10
