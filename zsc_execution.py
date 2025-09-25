@@ -69,7 +69,6 @@ def publish_artifact(token):
 
 def execute_pipeline(token, pipeline_name, version_name):
     url = f"https://us1.api.matillion.com/dpc/v1/projects/{project_id}/pipeline-executions"
-    print("Version name from publish_artifact function : ",version_name)
 
     payload = json.dumps({
         "pipelineName": pipeline_name,
@@ -84,7 +83,6 @@ def execute_pipeline(token, pipeline_name, version_name):
     }
 
     response = requests.post(url, headers=headers, data=payload)
-    print("\nExecuting Pipelines : ")
     print(f"\nExecuted pipeline: {pipeline_name}")
     print("Status Code:", response.status_code)
     print(response.text)
@@ -220,6 +218,11 @@ def main():
 
         # publish_artifact(token)
         version_name = publish_artifact(token)
+
+        print("\nVersion name from publish_artifact function : ",version_name)
+
+
+        print("\nExecuting Changed Pipelines...")
 
         for pipeline_name in changed_pipelines:
             execute_pipeline(token, pipeline_name, version_name)
