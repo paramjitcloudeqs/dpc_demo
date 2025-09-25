@@ -40,7 +40,7 @@ pipeline:
         warehouse: "[Environment Default]"
         database: "${env_database}"
         schema: "${env_schema}"
-        targetTable: "DPC_MTLN_TEST_1"
+        targetTable: "DPC_MTLN_VERSION_TEST_1"
         orderBy:
       postProcessing:
         updateOutputMessage:
@@ -69,8 +69,8 @@ design:
       tempMetlId: 1184069
     Rename (ID->Rename_ID,Name->Rename->Rename_Name..):
       position:
-        x: 500
-        "y": 80
+        x: 510
+        "y": 60
       tempMetlId: 1184072
     Rewrite Table:
       position:
