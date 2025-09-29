@@ -133,7 +133,7 @@ design:
     Calculator 0:
       position:
         x: 600
-        "y": 200
+        "y": 190
       tempMetlId: 1191164
     Rewrite Table:
       position:
