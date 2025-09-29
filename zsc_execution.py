@@ -6,6 +6,8 @@ import os
 import yaml
 import re
 
+import sys
+
 client_id = os.getenv("CLIENT_ID")
 client_secret = os.getenv("CLIENT_SECRET")
 project_id = os.getenv("PROJECT_ID")
@@ -103,19 +105,18 @@ def execute_pipeline(token, pipeline_name, version_name):
 
     response = requests.get(url, headers=headers)
 
-    if response.status_code == 200:
-        data = response.json()
-        result = data.get("result", {})
+    data = response.json()
+    result = data.get("result", {})
 
-        pipeline_name = result.get("pipelineName")
-        status = result.get("status")
-        message = result.get("message")
+    pipeline_name = result.get("pipelineName")
+    status = result.get("status")
+    message = result.get("message")
 
-        print("Pipeline Name:", pipeline_name)
-        print("Status:", status)
-        print("Message:", message)
-    else:
-        print("Error:", response.status_code, response.text)
+    print("Pipeline Name:", pipeline_name)
+    print("Status:", status)
+    print("Message:", message)
+
+    return status
 
     # print(response.text)
     
@@ -258,8 +259,10 @@ def main():
         print("\nExecuting Changed Pipelines...")
 
         for pipeline_name in changed_pipelines:
-            execute_pipeline(token, pipeline_name, version_name)
-            
+            status = execute_pipeline(token, pipeline_name, version_name)
+
+            if status == "FAILED":
+                sys.exit("Script terminated due to failure in pipeline execution.")
 
     except Exception as e:
         print(f"\nExecution failed: {e}")
