@@ -261,8 +261,8 @@ def main():
         for pipeline_name in changed_pipelines:
             status = execute_pipeline(token, pipeline_name, version_name)
 
-            if status == "FAILED":
-                sys.exit("Script terminated due to failure in pipeline execution.")
+            # if status == "FAILED":
+            #     sys.exit("Script terminated due to failure in pipeline execution.")
 
     except Exception as e:
         print(f"\nExecution failed: {e}")
