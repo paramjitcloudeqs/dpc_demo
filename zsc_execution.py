@@ -259,7 +259,7 @@ def main():
         print("\nExecuting Changed Pipelines...")
 
         for pipeline_name in changed_pipelines:
-            status = execute_pipeline(token, pipeline_name, version_name)
+            execute_pipeline(token, pipeline_name, version_name)
 
             # if status == "FAILED":
             #     sys.exit("Script terminated due to failure in pipeline execution.")
