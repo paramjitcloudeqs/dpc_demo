@@ -1,7 +1,7 @@
 import requests
 import json
 from datetime import datetime
-import io
+import time
 import os
 import yaml
 import re
@@ -89,6 +89,8 @@ def execute_pipeline(token, pipeline_name, version_name):
     data = response.json()
     pipeline_execution_id = data.get("pipelineExecutionId")
     print("Pipeline Execution ID:", pipeline_execution_id)
+
+    time.sleep(20)
 
     # Check execution status
 
