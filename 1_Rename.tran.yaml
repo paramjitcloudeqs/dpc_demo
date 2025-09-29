@@ -39,8 +39,8 @@ pipeline:
         componentName: "Rewrite Table"
         warehouse: "[Environment Default]"
         database: "${env_database}"
-        schema: "${env_schema}"
-        targetTable: "DPC_MTLN_VERSION_TEST_1"
+        schema: "${env_schema4}"
+        targetTable: "DPC_MTLN_VERSION_TEST_2"
         orderBy:
       postProcessing:
         updateOutputMessage:
