@@ -69,8 +69,8 @@ design:
       tempMetlId: 1184069
     Rename (ID->Rename_ID,Name->Rename->Rename_Name..):
       position:
-        x: 550
-        "y": 90
+        x: 530
+        "y": 60
       tempMetlId: 1184072
     Rewrite Table:
       position:
