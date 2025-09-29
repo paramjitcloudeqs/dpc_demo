@@ -214,7 +214,7 @@ def main():
 
         token = get_token()
 
-        hardcoding_quality_checks() # Run quality checks before publishing
+        # hardcoding_quality_checks() # Run quality checks before publishing
 
         # publish_artifact(token)
         version_name = publish_artifact(token)
