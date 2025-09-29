@@ -85,7 +85,38 @@ def execute_pipeline(token, pipeline_name, version_name):
     response = requests.post(url, headers=headers, data=payload)
     print(f"\nExecuted pipeline: {pipeline_name}")
     print("Status Code:", response.status_code)
-    print(response.text)
+
+    data = response.json()
+    pipeline_execution_id = data.get("pipelineExecutionId")
+    print("Pipeline Execution ID:", pipeline_execution_id)
+
+    # Check execution status
+
+    url = f"https://us1.api.matillion.com/dpc/v1/projects/{project_id}/pipeline-executions/{pipeline_execution_id}"
+
+    headers = {
+        'Accept': 'application/json',
+        'Authorization': f'Bearer {token}'
+    }
+
+    response = requests.get(url, headers=headers)
+
+    if response.status_code == 200:
+        data = response.json()
+        result = data.get("result", {})
+
+        pipeline_name = result.get("pipelineName")
+        status = result.get("status")
+        message = result.get("message")
+
+        print("Pipeline Name:", pipeline_name)
+        print("Status:", status)
+        print("Message:", message)
+    else:
+        print("Error:", response.status_code, response.text)
+
+    # print(response.text)
+    
 
 def get_changed_pipelines():
     pipelines = []
@@ -226,6 +257,7 @@ def main():
 
         for pipeline_name in changed_pipelines:
             execute_pipeline(token, pipeline_name, version_name)
+            
 
     except Exception as e:
         print(f"\nExecution failed: {e}")
